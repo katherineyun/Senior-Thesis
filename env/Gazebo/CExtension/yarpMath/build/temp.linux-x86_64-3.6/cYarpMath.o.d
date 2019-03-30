@@ -1,0 +1,1 @@
+commandline: -I/home/peixin/miniconda3/envs/py3.6/lib/python3.6/site-packages/numpy/core/include -I/usr/local/include/yarp -I/home/peixin/miniconda3/envs/py3.6/include/python3.6m -c-std=c++14-I/home/peixin/miniconda3/envs/py3.6/lib/python3.6/site-packages/numpy/core/include -I/usr/local/include/yarp -I/home/peixin/miniconda3/envs/py3.6/include/python3.6m

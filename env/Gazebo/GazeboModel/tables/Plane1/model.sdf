@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+  <sdf version='1.6'>
+    <model name="Plane1">
+      <static>true</static>
+        <link name='body'>
+          <pose>0 0 0 0 0 0</pose>
+
+          <collision name='collision'>
+
+            <geometry>
+              <box>
+                <size>.7 .6 0.02</size>
+              </box>
+            </geometry>
+            
+          </collision>
+
+          <visual name='visual'>
+
+            <geometry>
+              <box>
+                <size>.7 .6 0.02</size>
+              </box>
+            </geometry>
+
+            <material>
+              <script>
+        	<uri>file://media/materials/scripts/gazebo.material</uri>
+        	<name>Gazebo/WoodFloor</name>
+      	      </script>
+            </material>
+
+          </visual>
+        </link>
+    </model>
+  </sdf>

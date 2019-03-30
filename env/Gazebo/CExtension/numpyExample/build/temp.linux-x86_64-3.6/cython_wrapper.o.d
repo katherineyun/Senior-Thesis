@@ -1,0 +1,1 @@
+commandline: -I/home/peixin/miniconda3/envs/py3.6/lib/python3.6/site-packages/numpy/core/include -I/home/peixin/miniconda3/envs/py3.6/include/python3.6m -c-I/home/peixin/miniconda3/envs/py3.6/lib/python3.6/site-packages/numpy/core/include -I/home/peixin/miniconda3/envs/py3.6/include/python3.6m
