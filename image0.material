@@ -1,0 +1,13 @@
+material TestImages/Image0
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture friends.png
+      }
+    }
+  }
+}
