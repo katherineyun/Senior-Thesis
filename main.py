@@ -21,19 +21,14 @@ def main(env_id):
 		speech = speechRec()
 		recognizer, microphone = speech.init()
 		word = speech.startGame(recognizer, microphone)
-		if word == 'Rachel':
-			target = 'jennifer_anniston'
-		if word == 'Joey':
-			target = 'matt_leBlanc'
-		if word == 'Phoebe':
-			target = 'lisa_kudrow'
-		if word == 'Monica':
-			target = 'courteney_cox'
-		if word == 'Chandler':
-			target = 'matthew_perry'
-		if word == 'Ross':
-			target = 'david_schwimmer'
 
+		char_names = ["Rachel", "Joey", "Phoebe", "Catherine", "Monica","Chandler", "Ross"]
+		art_names = ['jennifer_anniston', 'matt_leBlanc', 'lisa_kudrow', 'unknown', 'courteney_cox', 'matthew_perry', 'david_schwimmer']
+
+		for i in range(len(char_names)):
+			if(word == char_names[i]):
+				target = art_names[i]
+				break
 
 		encodings = "env/Gazebo/friends.pickle"
 		#image = env.cameraReader()
