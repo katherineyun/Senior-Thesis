@@ -335,7 +335,6 @@ class iCubG(iCub):
             # opening the drivers
             print('Opening the motor driver for right arm')
             self.right_arm_driver.open(right_arm_options)
-            print('i am here 1')
             if not self.right_arm_driver.isValid():
                 print('Cannot open the right arm driver!')
                 sys.exit()

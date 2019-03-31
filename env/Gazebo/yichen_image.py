@@ -7,6 +7,9 @@ import argparse
 import pickle
 import cv2
 import os, sys
+import time
+from matplotlib import pyplot as plt
+
 
 
 def faceRec(encodings, image, person):
@@ -56,18 +59,18 @@ def faceRec(encodings, image, person):
 			y = top - 15 if top - 15 > 15 else top + 15
 			cv2.putText(image, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
 						0.75, (0, 255, 0), 2)
-		face_list.append((name, ((top+bottom)/2, (left+right)/2)))
+			face_list.append((name, ((top+bottom)/2, (left+right)/2)))
 
 	print(face_list)
 	cv2.namedWindow("output", cv2.WINDOW_NORMAL)
 	imS = cv2.resize(image, (1080, 1960))
 	cv2.imshow("Image",imS)
-	cv2.waitKey(0)
+	while True:
+		key = cv2.waitKey(1) & 0xff
+		if key == 13:
+			break
 	return face_list
 
-def main():
-	image = cv2.imread('friends_test/00000052.jpg')
-	faceRec('friends.pickle', image)
 
-if __name__ == "__main__":
-	main()
+
+

@@ -79,14 +79,9 @@ class speechRec(object):
         if guess["transcription"] in self.names:
             return guess["transcription"]
         else:
-            print("Sorry,'{}' is not in this picture.".format(self.word))
+            print("Sorry,'{}' is not in this picture.".format(guess["transcription"]))
             return False
 
-
-if __name__ == "__main__":
-
-    rec = speechRec()
-    recognizer, microphone = rec.init()
-    rec.startGame(recognizer, microphone)
+        return False
 
 
