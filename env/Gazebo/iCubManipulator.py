@@ -99,14 +99,13 @@ class iCub(object):
 
         return state
 
-    def invKin(self, orientation):
+    def invKin(self, orientation, position):
         pos = yarp.Vector(3)
         orn = yarp.Vector(4)
 
-        objectx, objecty, objectz = self.G.blockRandomizer()
-        pos.set(0,-objectx)
-        pos.set(1,-objecty)
-        pos.set(2,objectz-1.0)
+        pos.set(0,position[0])
+        pos.set(1,position[1])
+        pos.set(2,position[2])
         orn.set(0, orientation[0])
         orn.set(1, orientation[1])
         orn.set(2, orientation[2])
@@ -173,7 +172,6 @@ class iCubG(iCub):
         self.actualEEPos = []  # for plotting
 
         self.target_location = [objectx, objecty, objectz]
-        print('this is target_location', self.target_location)
         self.to_target_vec = [math.inf,math.inf,math.inf]
 
     def calc_state(self):
@@ -196,32 +194,9 @@ class iCubG(iCub):
 
         return np.array(state)
 
-    def applyAction(self, eeCommands):
+    def applyAction(self, position):
 
-        dx = eeCommands[0]
-        dy = eeCommands[1]
-        dz = eeCommands[2]
-
-        self.desiredEndEffectorPosition[0] =  self.desiredEndEffectorPosition[0] + dx
-        # if self.desiredEndEffectorPosition[0] > -self.G.tablex + 0.3:
-        #     self.desiredEndEffectorPosition[0] = -self.G.tablex + 0.3
-        # if self.desiredEndEffectorPosition[0] < -self.G.tablex - 0.2:
-        #     self.desiredEndEffectorPosition[0] = -self.G.tablex - 0.2
-
-        self.desiredEndEffectorPosition[1] = self.desiredEndEffectorPosition[1] + dy
-        # if self.desiredEndEffectorPosition[1] > -self.G.tabley + 0.35:
-        #     self.desiredEndEffectorPosition[1] = -self.G.tabley + 0.35
-        # if self.desiredEndEffectorPosition[1] < -self.G.tabley - 0.1:
-        #     self.desiredEndEffectorPosition[1] = -self.G.tabley - 0.1
-
-        self.desiredEndEffectorPosition[2] = self.desiredEndEffectorPosition[2] + dz
-        # if self.desiredEndEffectorPosition[2] < self.G.tablez - 1.0 + 0.01:
-        #     self.desiredEndEffectorPosition[2] = self.G.tablez - 1.0 + 0.01
-        # if self.desiredEndEffectorPosition[2] > self.G.tablez - 1.0  + 0.25:
-        #     self.desiredEndEffectorPosition[2] = self.G.tablez - 1.0 + 0.25
-
-
-        self.invKin([0, 1, 0, 3.14])  # apply actions using iCub cartesian control
+        self.invKin([0, 1, 0, 3.14], position)  # apply actions using iCub cartesian control
 
         return
 

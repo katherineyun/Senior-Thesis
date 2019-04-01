@@ -143,51 +143,45 @@ class icubEnv(gym.Env):
 
 		self.episodeCounter = self.episodeCounter + 1
 
-		s_plus=self.prepareObservations(s)
+
 
 		if self.robot.img and self.episodeCounter % 50 ==0:
 			print("saving images for this episode")
 
 
-		return s_plus
+		return
+	def actConverter(self,target_coor):
+		"""this function converts coordinates generated from cv face_recognizer to iCub's world coordinate. Here we want the iCub's
+		finger to point towards this direction"""
 
+		action = target_coor
 
-
-	def prepareObservations(self, s):
-
-
-		return s
+		return action
 
 	def step(self, action):
 
-		dv = 0.01
-		dx = float(np.clip(action[0], -1, +1)) * dv  # move in x direction
-		dy = float(np.clip(action[1], -1, +1)) * dv  # move in y direction
-		dz = float(np.clip(action[2], -1, +1)) * dv  # move in z direction
-
-		realAction = [dx, dy, dz]
-
-		self.G.simulationControl("p", 0) # unpause the simulation
+		self.resume()
 
 		for i in range(self.actionRepeat):  # it is 1 by default, used for frame skip
-			self.robot.applyAction(realAction)
+			self.robot.applyAction(action)
 			time.sleep(0.02)
 			self.done = self._termination()
 			if self.done:
 				break
 			self.envStepCounter = self.envStepCounter + 1
 
-
-		self.G.simulationControl("p", 1) # pause the simulation
-
+		self.pause()
 
 		state = self.robot.calc_state()  # get low dimensional state
-
-		s_plus = self.prepareObservations(state)
-
 		return
 
 
+	def pause(self):
+		self.G.simulationControl("p", 1)  # pause the simulation
+		return
+	def resume(self):
+		self.G.simulationControl("p", 0)  # unpause the simulation
+		return
 
 	def cameraReader(self):
 		# Create numpy array to receive the image and the YARP image wrapped around it
@@ -196,8 +190,8 @@ class icubEnv(gym.Env):
 		a = np.reshape(a, (480,640,3))
 
 
-		scipy.misc.imsave("out"+str(self.envStepCounter)+".jpg",a)
-		self.envStepCounter += 1
+		# scipy.misc.imsave("out"+str(self.envStepCounter)+".png",a)
+		# self.envStepCounter += 1
 
 
 		return a

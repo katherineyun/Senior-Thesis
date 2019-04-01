@@ -62,8 +62,11 @@ def faceRec(encodings, image, person):
 			face_list.append((name, ((top+bottom)/2, (left+right)/2)))
 
 	print(face_list)
-	cv2.namedWindow("output", cv2.WINDOW_NORMAL)
-	imS = cv2.resize(image, (1080, 1960))
+	im2 = image.copy()
+	im2[:,:,0] = image[:,:,2]
+	im2[:, :, 2] = image[:, :, 0]
+	#cv2.namedWindow("output", cv2.WINDOW_NORMAL)
+	imS = cv2.resize(im2, (1080, 1960))
 	cv2.imshow("Image",imS)
 	while True:
 		key = cv2.waitKey(1) & 0xff
