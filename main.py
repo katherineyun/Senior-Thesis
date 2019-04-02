@@ -32,12 +32,12 @@ def main(env_id):
 				target = art_names[i]
 				break
 
-		##decide target and face recognition
-		#target = 'courteney_cox'
-		encodings = "env/Gazebo/friends.pickle"
-		#image = cv2.imread('env/Gazebo/00000054.jpg')
 
-		#target_coor = [-0.41, 0.1, 0.5]
+		target = 'lisa_kudrow'
+		encodings = "env/Gazebo/friends.pickle"
+		image = cv2.imread('env/Gazebo/00000054.jpg')
+
+
 
 		env.reset()
 		time.sleep(2)
@@ -45,14 +45,16 @@ def main(env_id):
 		image = env.cameraReader()
 		time.sleep(2)
 
-		face = faceRec(encodings, image, target)
-		target_coor = face[0][1]
+		name, face_coor, image_size = faceRec(encodings, image, target)
+		target_coor = [face_coor[0]/image_size[0]*480*7/8 , face_coor[1]/image_size[1]*480]
+
+		target_coor = [-0.41, 0.1, 0.5]
 		action = env.actConverter(target_coor)
 
 		for t in range(300):
 			env.step(action)
 
-		time.sleep(3)
+		time.sleep(10)
 		env.close()
 
 

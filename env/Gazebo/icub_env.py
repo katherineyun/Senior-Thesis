@@ -190,8 +190,8 @@ class icubEnv(gym.Env):
 		a = np.reshape(a, (480,640,3))
 
 
-		# scipy.misc.imsave("out"+str(self.envStepCounter)+".png",a)
-		# self.envStepCounter += 1
+		scipy.misc.imsave("out"+str(self.envStepCounter)+".png",a)
+		self.envStepCounter += 1
 
 
 		return a

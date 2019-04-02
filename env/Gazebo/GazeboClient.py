@@ -155,7 +155,7 @@ class GazeboClient(object):
         name_of_model = "image0"
         path2image = self.path2image+"model.sdf"
 
-        objectx1, objecty1, objectz1 = [3, 0, 1.5]
+        objectx1, objecty1, objectz1 = [2.3, 0, 1.1]
         self.modelTask("f", name_of_model, tuple([objectx1, objecty1, objectz1, 0.0, 0.0, 0.0]), path2image)
 
         time.sleep(3)
