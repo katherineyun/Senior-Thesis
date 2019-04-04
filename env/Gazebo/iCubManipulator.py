@@ -333,27 +333,27 @@ class iCubG(iCub):
             self.right_arm_CartesianControl.attachTipFrame(tip_x, tip_o)
             print("Finished defining a different effector")
 
-        if self.activationPart[2]:
-            head_options = yarp.Property()
-            self.head_driver = yarp.PolyDriver()
-            #set the poly driver options
-            head_options.put("robot", "icub")
-            head_options.put("device", "remote_controlboard")
-            head_options.put("local", "/head/client")
-            head_options.put("remote", "/icub/head")
-
-            # wait for port being ready
-            while not yarp.Network.exists("/icub/head/command:i"):
-                time.sleep(0.5)
-            print("The simulator head ports are ready for connection")
-
-            # opening the drivers
-            print('Opening the motor driver for head')
-            self.head_driver.open(head_options)
-
-            if not self.head_driver.isValid():
-                print('Cannot open the head driver!')
-                sys.exit()
+        # if self.activationPart[2]:
+        #     head_options = yarp.Property()
+        #     self.head_driver = yarp.PolyDriver()
+        #     #set the poly driver options
+        #     head_options.put("robot", "icub")
+        #     head_options.put("device", "remote_controlboard")
+        #     head_options.put("local", "/head/client")
+        #     head_options.put("remote", "/icub/head")
+        #
+        #     # wait for port being ready
+        #     while not yarp.Network.exists("/icub/head/command:i"):
+        #         time.sleep(0.5)
+        #     print("The simulator head ports are ready for connection")
+        #
+        #     # opening the drivers
+        #     print('Opening the motor driver for head')
+        #     self.head_driver.open(head_options)
+        #
+        #     if not self.head_driver.isValid():
+        #         print('Cannot open the head driver!')
+        #         sys.exit()
 
         if self.activationPart[3]:
             torso_options = yarp.Property()

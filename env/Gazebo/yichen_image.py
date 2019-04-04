@@ -67,10 +67,10 @@ def faceRec(encodings, image, person):
 	im2[:, :, 2] = image[:, :, 0]
 	imS = cv2.resize(im2, (640, 480))
 	cv2.imshow("Image",imS)
-	while True:
-		key = cv2.waitKey(1) & 0xff
-		if key == 13:
-			break
+	# while True:
+	# 	key = cv2.waitKey(1) & 0xff
+	# 	if key == 13:
+	# 		break
 	return face_list[0][0], face_list[0][1], image.shape[:2]
 
 

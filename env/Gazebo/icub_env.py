@@ -154,7 +154,12 @@ class icubEnv(gym.Env):
 		"""this function converts coordinates generated from cv face_recognizer to iCub's world coordinate. Here we want the iCub's
 		finger to point towards this direction"""
 
-		action = target_coor
+		action = np.zeros(3)
+		action[0] = -0.41
+		action[1] = -0.7 + target_coor[1]/640*0.95
+		action[2] = 1.15 - target_coor[0]/480*0.8
+
+
 
 		return action
 
